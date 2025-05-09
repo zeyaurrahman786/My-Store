@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ProductContext } from "../utils/Context";
+import { nanoid } from "nanoid";
 
 const Create = () => {
   const [image, setImage] = useState("");
@@ -7,41 +9,45 @@ const Create = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
 
+  const [products, setProducts] = useContext(ProductContext);
+
   const submitHandler = (e) => {
     e.preventDefault();
     const newProduct = {
+      id: nanoid(),           
       image,
       title,
       category,
       price,
       description,
     };
-    console.log(newProduct);
+    // console.log(newProduct);
+    setProducts(([...products, newProduct]));
   };
 
   const handleImageChange = (e) => {
     setImage(e.target.value);
-    console.log(image);
+    // console.log(image);
   };
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
-    console.log(title);
+    // console.log(title);
   };
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
-    console.log(category);
+    // console.log(category);
   };
 
   const handlePriceChange = (e) => {
     setPrice(e.target.value);
-    console.log(price);
+    // console.log(price);
   };
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
-    console.log(description);
+    // console.log(description);
   };
 
   return (
@@ -58,6 +64,7 @@ const Create = () => {
           placeholder="Enter image URL"
           required
           onChange={handleImageChange}
+          value={image}
         />
         <input
           className="w-1/2 h-10 p-2 border rounded"
@@ -65,6 +72,7 @@ const Create = () => {
           placeholder="Enter title"
           required
           onChange={handleTitleChange}
+          value={title}
         />
         <input
           className="w-1/2 h-10 p-2 border rounded"
@@ -72,6 +80,7 @@ const Create = () => {
           placeholder="Enter your category"
           required
           onChange={handleCategoryChange}
+          value={category}
         />
         <input
           className="w-1/2 h-10 p-2 border rounded"
@@ -79,12 +88,14 @@ const Create = () => {
           placeholder="Enter price"
           required
           onChange={handlePriceChange}
+          value={price}
         />
         <textarea
           className="w-1/2 h-10 p-2 border rounded"
           placeholder="Enter product description"
           required
           onChange={handleDescriptionChange}
+          value={description}
         ></textarea>
         <button className="py-2 px-5 border rounded border-blue-400 text-blue-500">
           Add New Product
