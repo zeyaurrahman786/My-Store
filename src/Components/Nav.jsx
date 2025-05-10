@@ -6,17 +6,16 @@ import { ProductContext } from "../utils/Context";
 const Nav = () => {
   const [products] = useContext(ProductContext);
 
-  let category =
+  let distinctCategory =
     products && products.reduce((acc, cv) => [...acc, cv.category], []);
-  category = [...new Set(category)];
-  console.log(category);
+  distinctCategory = [...new Set(distinctCategory)];
+  // console.log(distinctCategory);
 
   const color = () => {
-    return `rgb(
-    ${(Math.random() * 255).toFixed()},
-    ${(Math.random() * 255).toFixed()}, 
-    ${(Math.random() * 255).toFixed()})`;
+    return `rgba(${(Math.random() * 255).toFixed()},
+    ${(Math.random() * 255).toFixed()}, 0.4)`;
   };
+  // console.log(color());
 
   return (
     <nav className="w-[15%] h-full bg-zinc-50 flex flex-col items-center pt-5">
@@ -30,16 +29,17 @@ const Nav = () => {
       <h1 className="text-2xl w-[80%] mb-3">Category Filter</h1>
 
       <div className="w-[80%]">
-        {category.map((cat, i) => (
-          <Link 
-          to={`/?category/${cat}`}
-          key={i}
-          className="mb-3 flex items-center">
+        {distinctCategory.map((category, index) => (
+          <Link
+            to={`/?category=${category}`}
+            key={index}
+            className="mb-3 flex items-center"
+          >
             <span
               style={{ backgroundColor: color() }}
               className="w-[15px] h-[15px] rounded-full mr-2"
             ></span>
-            {cat}
+            {category}
           </Link>
         ))}
       </div>
