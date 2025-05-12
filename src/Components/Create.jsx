@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ProductContext } from "../utils/Context";
 import { nanoid } from "nanoid";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const [image, setImage] = useState("");
@@ -10,6 +11,8 @@ const Create = () => {
   const [description, setDescription] = useState("");
 
   const [products, setProducts] = useContext(ProductContext);
+
+  const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -23,6 +26,7 @@ const Create = () => {
     };
     // console.log(newProduct);
     setProducts(([...products, newProduct]));
+    navigate("/");
   };
 
   const handleImageChange = (e) => {
