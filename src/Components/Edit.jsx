@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../utils/Context";
-import { nanoid } from "nanoid";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Edit = () => {
